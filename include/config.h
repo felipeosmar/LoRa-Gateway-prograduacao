@@ -6,13 +6,13 @@
 // ============================================
 
 // --- Configuracao WiFi ---
-#define WIFI_SSID "Escalador"
-#define WIFI_PASSWORD "Escalador@123"
+#define WIFI_SSID "Lidomar"
+#define WIFI_PASSWORD "Lidomar123"
 #define WIFI_CONNECT_TIMEOUT_MS 10000
 #define WIFI_RECONNECT_INTERVAL_MS 5000
 
 // --- Configuracao do Servidor Backend ---
-#define SERVER_HOST "10.1.82.18"
+#define SERVER_HOST "192.168.0.3"
 #define SERVER_PORT 8081
 #define SERVER_ENDPOINT "/api/sensor-data"
 #define HTTP_TIMEOUT_MS 5000

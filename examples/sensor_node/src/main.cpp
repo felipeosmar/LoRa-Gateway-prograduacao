@@ -1,11 +1,17 @@
 /**
- * No Sensor LoRa - Exemplo para Heltec WiFi LoRa 32 V2
+ * No Sensor LoRa - Monitoramento de Maquina Industrial
  *
- * Envia dados de sensores para o Gateway LoRa JVtech
+ * Envia dados de uma maquina para o Gateway LoRa JVtech
  * usando protocolo JSON.
  *
- * Este exemplo simula leituras de temperatura, umidade e bateria.
- * Substitua pelas leituras reais dos seus sensores.
+ * Dados transmitidos:
+ * - macAddress: Endereco MAC do ESP32
+ * - machineId: ID da maquina (configuravel)
+ * - timestamp: Tempo em segundos desde boot
+ * - digitalInputs: 4 entradas digitais (di1-di4)
+ * - analogInputs: 2 entradas analogicas (ai1-ai2)
+ * - temperature: Temperatura interna do ESP32
+ * - trigger: "event" se houve mudanca ou "periodic" se transmissao periodica
  *
  * Hardware: Heltec WiFi LoRa 32 V2
  * - ESP32 + SX1276 (LoRa)
@@ -19,6 +25,15 @@
 #include <ArduinoJson.h>
 #include <Wire.h>
 #include "SSD1306Wire.h"
+
+// Para temperatura interna do ESP32
+#ifdef __cplusplus
+extern "C" {
+#endif
+uint8_t temprature_sens_read();
+#ifdef __cplusplus
+}
+#endif
 
 // ============================================
 // CONFIGURACOES DE PINOS - HELTEC LORA 32 V2
@@ -55,17 +70,24 @@
 #define OLED_RST 16
 #endif
 
-// LED onboard (ja definido pela board Heltec = GPIO25)
-
 // Controle de energia Vext (para perifericos externos)
 #ifndef VEXT_PIN
 #define VEXT_PIN 21
 #endif
 
-// Pino ADC para leitura de bateria
-#ifndef BATTERY_PIN
-#define BATTERY_PIN 37
-#endif
+// ============================================
+// CONFIGURACOES DE ENTRADAS
+// ============================================
+
+// Pinos das entradas digitais (ajuste conforme seu hardware)
+#define DI1_PIN 12   // Entrada Digital 1
+#define DI2_PIN 13   // Entrada Digital 2
+#define DI3_PIN 32   // Entrada Digital 3
+#define DI4_PIN 33   // Entrada Digital 4
+
+// Pinos das entradas analogicas
+#define AI1_PIN 36   // Entrada Analogica 1 (SVP)
+#define AI2_PIN 39   // Entrada Analogica 2 (SVN)
 
 // ============================================
 // CONFIGURACOES DE RADIO LORA
@@ -87,16 +109,19 @@
 #define LORA_CR 5
 #endif
 
-// ID do no
-#ifndef NODE_ID
-#define NODE_ID "NODE001"
+// ID da maquina (ajuste para cada dispositivo)
+#ifndef MACHINE_ID
+#define MACHINE_ID "M001"
 #endif
 
 // Sync Word (deve ser igual ao gateway)
 #define LORA_SYNC_WORD 0x20
 
-// Intervalo de transmissao (ms)
-#define TX_INTERVAL 3000  // 3 segundos
+// Intervalo de transmissao periodica (ms)
+#define TX_INTERVAL 30000  // 30 segundos
+
+// Debounce para deteccao de eventos (ms)
+#define DEBOUNCE_TIME 50
 
 // ============================================
 // OBJETOS GLOBAIS
@@ -113,6 +138,19 @@ uint32_t packetsSent = 0;
 uint32_t packetsAcked = 0;
 int lastRssi = 0;
 
+// Estado das entradas digitais
+bool lastDI1 = false;
+bool lastDI2 = false;
+bool lastDI3 = false;
+bool lastDI4 = false;
+
+// Ultimo envio e estados anteriores para deteccao de eventos
+unsigned long lastTxTime = 0;
+bool inputChanged = false;
+
+// MAC Address
+String macAddress = "";
+
 // ============================================
 // PROTOTIPOS DE FUNCOES
 // ============================================
@@ -120,13 +158,17 @@ int lastRssi = 0;
 void initVext();
 void initOLED();
 bool initLoRa();
-void sendSensorData();
-String createPacket(float temp, float hum, float battery);
+void initInputs();
+String getMacAddress();
+void sendMachineData(const char* trigger);
+String createPacket(const char* trigger);
 void checkForAck();
-float readTemperature();
-float readHumidity();
-float readBattery();
-void updateDisplay(float temp, float hum, float bat, const char* status);
+float readInternalTemperature();
+bool readDigitalInputs(bool &di1, bool &di2, bool &di3, bool &di4);
+void readAnalogInputs(uint16_t &ai1, uint16_t &ai2);
+bool checkInputChanges();
+void updateDisplay(bool di1, bool di2, bool di3, bool di4,
+                   uint16_t ai1, uint16_t ai2, float temp, const char* status);
 void blinkLED(int times, int delayMs);
 
 // ============================================
@@ -144,24 +186,31 @@ void setup() {
     // Inicializa Vext (alimentacao para perifericos)
     initVext();
 
+    // Obtem MAC Address
+    macAddress = getMacAddress();
+
     Serial.println("\n");
     Serial.println("╔════════════════════════════════════════╗");
-    Serial.println("║   NO SENSOR LORA - HELTEC V2           ║");
+    Serial.println("║   MONITOR DE MAQUINA INDUSTRIAL        ║");
     Serial.println("╠════════════════════════════════════════╣");
-    Serial.printf("║ Node ID: %-29s ║\n", NODE_ID);
+    Serial.printf("║ Machine ID: %-26s ║\n", MACHINE_ID);
+    Serial.printf("║ MAC: %-33s ║\n", macAddress.c_str());
     Serial.printf("║ Frequencia: %.0f MHz                   ║\n", LORA_FREQUENCY / 1E6);
-    Serial.printf("║ Intervalo TX: %d s                     ║\n", TX_INTERVAL / 1000);
+    Serial.printf("║ TX Periodico: %d s                    ║\n", TX_INTERVAL / 1000);
     Serial.println("╚════════════════════════════════════════╝\n");
 
     // Inicializa OLED
     initOLED();
     display.clear();
     display.setFont(ArialMT_Plain_16);
-    display.drawString(0, 0, "LoRa Node");
+    display.drawString(0, 0, "Maquina");
     display.setFont(ArialMT_Plain_10);
     display.drawString(0, 20, "Inicializando...");
-    display.drawString(0, 35, NODE_ID);
+    display.drawString(0, 35, MACHINE_ID);
     display.display();
+
+    // Inicializa entradas
+    initInputs();
 
     // Inicializa LoRa
     if (!initLoRa()) {
@@ -176,15 +225,22 @@ void setup() {
         }
     }
 
-    Serial.println("No sensor pronto!\n");
+    // Le estado inicial das entradas digitais
+    readDigitalInputs(lastDI1, lastDI2, lastDI3, lastDI4);
+
+    Serial.println("Monitor de maquina pronto!\n");
     blinkLED(3, 100);
+
+    // Envia primeiro pacote como periodico
+    sendMachineData("periodic");
+    lastTxTime = millis();
 
     // Tela inicial
     display.clear();
     display.setFont(ArialMT_Plain_16);
-    display.drawString(0, 0, "LoRa Pronto!");
+    display.drawString(0, 0, "Pronto!");
     display.setFont(ArialMT_Plain_10);
-    display.drawString(0, 20, "Aguardando...");
+    display.drawString(0, 20, MACHINE_ID);
     display.display();
     delay(1000);
 }
@@ -194,39 +250,40 @@ void setup() {
 // ============================================
 
 void loop() {
-    // Le sensores
-    float temperature = readTemperature();
-    float humidity = readHumidity();
-    float battery = readBattery();
+    // Verifica se houve mudanca nas entradas digitais
+    bool eventTriggered = checkInputChanges();
 
-    // Atualiza display antes de enviar
-    updateDisplay(temperature, humidity, battery, "Enviando...");
+    // Verifica se e hora da transmissao periodica
+    bool periodicTrigger = (millis() - lastTxTime >= TX_INTERVAL);
 
-    // Envia dados dos sensores
-    sendSensorData();
+    // Le estado atual das entradas
+    bool di1, di2, di3, di4;
+    uint16_t ai1, ai2;
+    readDigitalInputs(di1, di2, di3, di4);
+    readAnalogInputs(ai1, ai2);
+    float temperature = readInternalTemperature();
 
-    // Aguarda possivel ACK do gateway
-    unsigned long startWait = millis();
-    bool ackReceived = false;
-    while (millis() - startWait < 2000) {
-        checkForAck();
-        delay(10);
+    // Atualiza display
+    char status[32];
+    snprintf(status, sizeof(status), "TX:%d", packetsSent);
+    updateDisplay(di1, di2, di3, di4, ai1, ai2, temperature, status);
+
+    // Envia dados se houve evento ou e hora da transmissao periodica
+    if (eventTriggered) {
+        Serial.println(">>> EVENTO: Mudanca detectada nas entradas!");
+        sendMachineData("event");
+        lastTxTime = millis();
+    } else if (periodicTrigger) {
+        Serial.println(">>> TX Periodico");
+        sendMachineData("periodic");
+        lastTxTime = millis();
     }
 
-    // Atualiza display com status
-    char status[32];
-    snprintf(status, sizeof(status), "TX:%d ACK:%d", packetsSent, packetsAcked);
-    updateDisplay(temperature, humidity, battery, status);
+    // Verifica ACK do gateway
+    checkForAck();
 
-    // Modo sleep ou espera ate proximo envio
-    Serial.printf("Aguardando %d segundos...\n\n", TX_INTERVAL / 1000);
-
-    // Para economia de energia, pode usar deep sleep:
-    // esp_sleep_enable_timer_wakeup(TX_INTERVAL * 1000ULL);
-    // esp_deep_sleep_start();
-
-    // Ou simplesmente delay
-    delay(TX_INTERVAL);
+    // Pequeno delay para nao sobrecarregar
+    delay(50);
 }
 
 // ============================================
@@ -285,23 +342,110 @@ bool initLoRa() {
     return true;
 }
 
+void initInputs() {
+    // Configura entradas digitais com pull-up interno
+    pinMode(DI1_PIN, INPUT_PULLUP);
+    pinMode(DI2_PIN, INPUT_PULLUP);
+    pinMode(DI3_PIN, INPUT_PULLUP);
+    pinMode(DI4_PIN, INPUT_PULLUP);
+
+    // Entradas analogicas nao precisam de configuracao especial
+    // mas vamos garantir que estao no modo correto
+    analogReadResolution(12);  // 12 bits (0-4095)
+    analogSetAttenuation(ADC_11db);  // 0-3.3V range
+
+    Serial.println("[IO] Entradas configuradas:");
+    Serial.printf("  DI1: GPIO%d\n", DI1_PIN);
+    Serial.printf("  DI2: GPIO%d\n", DI2_PIN);
+    Serial.printf("  DI3: GPIO%d\n", DI3_PIN);
+    Serial.printf("  DI4: GPIO%d\n", DI4_PIN);
+    Serial.printf("  AI1: GPIO%d\n", AI1_PIN);
+    Serial.printf("  AI2: GPIO%d\n", AI2_PIN);
+}
+
+String getMacAddress() {
+    uint8_t mac[6];
+    esp_efuse_mac_get_default(mac);
+
+    char macStr[18];
+    snprintf(macStr, sizeof(macStr), "%02X:%02X:%02X:%02X:%02X:%02X",
+             mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+
+    return String(macStr);
+}
+
+// ============================================
+// FUNCOES DE LEITURA DE ENTRADAS
+// ============================================
+
+bool readDigitalInputs(bool &di1, bool &di2, bool &di3, bool &di4) {
+    // Le entradas (invertido porque usamos pull-up)
+    di1 = !digitalRead(DI1_PIN);
+    di2 = !digitalRead(DI2_PIN);
+    di3 = !digitalRead(DI3_PIN);
+    di4 = !digitalRead(DI4_PIN);
+
+    return true;
+}
+
+void readAnalogInputs(uint16_t &ai1, uint16_t &ai2) {
+    // Le valores analogicos (0-4095)
+    ai1 = analogRead(AI1_PIN);
+    ai2 = analogRead(AI2_PIN);
+}
+
+float readInternalTemperature() {
+    // Le temperatura interna do ESP32
+    // A funcao retorna em Fahrenheit, convertemos para Celsius
+    uint8_t tempF = temprature_sens_read();
+    float tempC = (tempF - 32) / 1.8;
+
+    // Aplica offset de calibracao (ajuste conforme necessario)
+    // A temperatura interna do ESP32 costuma ser maior que a ambiente
+    tempC -= 20.0;  // Offset tipico
+
+    return tempC;
+}
+
+bool checkInputChanges() {
+    static unsigned long lastChangeTime = 0;
+
+    bool di1, di2, di3, di4;
+    readDigitalInputs(di1, di2, di3, di4);
+
+    // Verifica se alguma entrada mudou
+    bool changed = (di1 != lastDI1) || (di2 != lastDI2) ||
+                   (di3 != lastDI3) || (di4 != lastDI4);
+
+    if (changed && (millis() - lastChangeTime > DEBOUNCE_TIME)) {
+        // Atualiza estados anteriores
+        lastDI1 = di1;
+        lastDI2 = di2;
+        lastDI3 = di3;
+        lastDI4 = di4;
+        lastChangeTime = millis();
+
+        Serial.printf("[IO] Mudanca: DI1=%d DI2=%d DI3=%d DI4=%d\n",
+                      di1, di2, di3, di4);
+
+        return true;
+    }
+
+    return false;
+}
+
 // ============================================
 // FUNCOES DE COMUNICACAO LORA
 // ============================================
 
-void sendSensorData() {
-    // Le sensores (substitua por leituras reais)
-    float temperature = readTemperature();
-    float humidity = readHumidity();
-    float battery = readBattery();
-
+void sendMachineData(const char* trigger) {
     // Cria pacote JSON
-    String packet = createPacket(temperature, humidity, battery);
+    String packet = createPacket(trigger);
 
-    Serial.println("--- Enviando Dados ---");
-    Serial.printf("Temp: %.1f C\n", temperature);
-    Serial.printf("Umid: %.1f %%\n", humidity);
-    Serial.printf("Bat: %.2f V\n", battery);
+    Serial.println("--- Enviando Dados da Maquina ---");
+    Serial.printf("Machine ID: %s\n", MACHINE_ID);
+    Serial.printf("MAC: %s\n", macAddress.c_str());
+    Serial.printf("Trigger: %s\n", trigger);
     Serial.printf("Seq: %d\n", packetSequence);
     Serial.printf("Pacote: %s\n", packet.c_str());
 
@@ -327,17 +471,44 @@ void sendSensorData() {
     LoRa.receive();
 }
 
-String createPacket(float temp, float hum, float battery) {
+String createPacket(const char* trigger) {
     JsonDocument doc;
 
-    doc["id"] = NODE_ID;
-    doc["type"] = "sensor";
+    // Identificacao
+    doc["id"] = MACHINE_ID;  // ID para o gateway
+    doc["type"] = "machine";
     doc["seq"] = packetSequence;
 
+    // Dados da maquina
     JsonObject data = doc["data"].to<JsonObject>();
-    data["temp"] = round(temp * 10) / 10.0;  // 1 casa decimal
-    data["hum"] = round(hum * 10) / 10.0;
-    data["bat"] = round(battery * 100) / 100.0;  // 2 casas decimais
+
+    data["macAddress"] = macAddress;
+    data["machineId"] = MACHINE_ID;
+    data["timestamp"] = millis() / 1000;  // Segundos desde boot
+
+    // Entradas digitais
+    bool di1, di2, di3, di4;
+    readDigitalInputs(di1, di2, di3, di4);
+
+    JsonObject digitalInputs = data["digitalInputs"].to<JsonObject>();
+    digitalInputs["di1"] = di1;
+    digitalInputs["di2"] = di2;
+    digitalInputs["di3"] = di3;
+    digitalInputs["di4"] = di4;
+
+    // Entradas analogicas
+    uint16_t ai1, ai2;
+    readAnalogInputs(ai1, ai2);
+
+    JsonObject analogInputs = data["analogInputs"].to<JsonObject>();
+    analogInputs["ai1"] = ai1;
+    analogInputs["ai2"] = ai2;
+
+    // Temperatura interna
+    data["temperature"] = round(readInternalTemperature() * 10) / 10.0;
+
+    // Trigger (event ou periodic)
+    data["trigger"] = trigger;
 
     String output;
     serializeJson(doc, output);
@@ -359,7 +530,7 @@ void checkForAck() {
         Serial.printf("[ACK] RSSI: %d dBm, SNR: %.2f dB\n",
                       lastRssi, LoRa.packetSnr());
 
-        // Verifica se e um ACK para este no
+        // Verifica se e um ACK para esta maquina
         JsonDocument doc;
         DeserializationError error = deserializeJson(doc, received);
 
@@ -367,7 +538,7 @@ void checkForAck() {
             String type = doc["type"] | "";
             String to = doc["to"] | "";
 
-            if (type == "ack" && to == NODE_ID) {
+            if (type == "ack" && to == MACHINE_ID) {
                 bool ok = doc["ok"] | false;
                 uint32_t seq = doc["seq"] | 0;
 
@@ -384,76 +555,40 @@ void checkForAck() {
 }
 
 // ============================================
-// FUNCOES DE LEITURA DE SENSORES
-// ============================================
-// Substitua estas funcoes pelas leituras reais
-// dos seus sensores (DHT22, BME280, etc.)
-
-float readTemperature() {
-    // Simula temperatura entre 20 e 30 graus
-    return 25.0 + (random(-50, 50) / 10.0);
-}
-
-float readHumidity() {
-    // Simula umidade entre 40 e 80%
-    return 60.0 + (random(-200, 200) / 10.0);
-}
-
-float readBattery() {
-    // Le tensao real da bateria usando ADC
-    // A Heltec V2 tem divisor de tensao no GPIO37
-    // Fator de conversao: ADC * 2 * 3.3 / 4096
-
-    uint16_t adcValue = analogRead(BATTERY_PIN);
-
-    // Conversao para tensao (ajuste conforme calibracao)
-    // Divisor de tensao 1:2, referencia 3.3V, ADC 12 bits
-    float voltage = (adcValue / 4096.0) * 3.3 * 2.0;
-
-    // Adiciona offset de calibracao se necessario
-    // voltage += 0.1;
-
-    // Se a leitura for muito baixa, pode ser que nao tem bateria
-    // Nesse caso, simula valor
-    if (voltage < 2.5) {
-        return 3.7 + (random(-40, 50) / 100.0);
-    }
-
-    return voltage;
-}
-
-// ============================================
 // FUNCOES DE INTERFACE
 // ============================================
 
-void updateDisplay(float temp, float hum, float bat, const char* status) {
+void updateDisplay(bool di1, bool di2, bool di3, bool di4,
+                   uint16_t ai1, uint16_t ai2, float temp, const char* status) {
     display.clear();
 
     // Titulo
     display.setFont(ArialMT_Plain_10);
-    display.drawString(0, 0, "LoRa Node: ");
-    display.drawString(65, 0, NODE_ID);
+    display.drawString(0, 0, MACHINE_ID);
+    display.drawString(70, 0, status);
 
     // Linha separadora
     display.drawHorizontalLine(0, 12, 128);
 
-    // Dados dos sensores
-    display.setFont(ArialMT_Plain_10);
-
+    // Entradas digitais
     char line[32];
+    snprintf(line, sizeof(line), "DI: %d %d %d %d", di1, di2, di3, di4);
+    display.drawString(0, 15, line);
 
+    // Entradas analogicas
+    snprintf(line, sizeof(line), "AI1:%4d AI2:%4d", ai1, ai2);
+    display.drawString(0, 27, line);
+
+    // Temperatura
     snprintf(line, sizeof(line), "Temp: %.1f C", temp);
-    display.drawString(0, 16, line);
+    display.drawString(0, 39, line);
 
-    snprintf(line, sizeof(line), "Umid: %.1f %%", hum);
-    display.drawString(0, 28, line);
-
-    snprintf(line, sizeof(line), "Bat: %.2fV", bat);
-    display.drawString(0, 40, line);
-
-    // Status na ultima linha
+    // Linha separadora
     display.drawHorizontalLine(0, 52, 128);
-    display.drawString(0, 54, status);
+
+    // MAC resumido
+    display.setFont(ArialMT_Plain_10);
+    display.drawString(0, 54, macAddress.substring(9));  // Ultimos 8 chars
 
     display.display();
 }

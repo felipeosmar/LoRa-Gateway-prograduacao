@@ -9,6 +9,7 @@ from flask_cors import CORS
 from datetime import datetime
 from tinydb import TinyDB, Query
 from tinydb.table import Document
+import threading
 import json
 import os
 import sys
@@ -36,6 +37,9 @@ readings_table = None
 devices_table = None
 gateway_status_table = None
 
+# Lock para acesso thread-safe ao banco de dados
+db_lock = threading.Lock()
+
 
 def init_db():
     """Inicializa o banco de dados TinyDB"""
@@ -45,12 +49,73 @@ def init_db():
     if not os.path.exists(DATABASE_DIR):
         os.makedirs(DATABASE_DIR)
 
+    # Verifica se arquivo existe e esta corrompido
+    if os.path.exists(DATABASE_FILE):
+        try:
+            with open(DATABASE_FILE, 'r') as f:
+                content = f.read().strip()
+                if content:
+                    json.loads(content)
+        except (json.JSONDecodeError, Exception) as e:
+            print(f"[DB] Arquivo de banco corrompido, criando novo: {e}")
+            os.remove(DATABASE_FILE)
+
     db = TinyDB(DATABASE_FILE, indent=2)
     readings_table = db.table('sensor_readings')
     devices_table = db.table('devices')
     gateway_status_table = db.table('gateway_status')
 
     print(f"[DB] Banco de dados inicializado: {DATABASE_FILE}")
+
+
+def safe_db_read(table):
+    """Le dados do banco de forma thread-safe"""
+    with db_lock:
+        try:
+            return table.all()
+        except Exception as e:
+            print(f"[DB] Erro na leitura: {e}")
+            return []
+
+
+def safe_db_search(table, query):
+    """Busca dados do banco de forma thread-safe"""
+    with db_lock:
+        try:
+            return table.search(query)
+        except Exception as e:
+            print(f"[DB] Erro na busca: {e}")
+            return []
+
+
+def safe_db_get(table, query):
+    """Busca um registro do banco de forma thread-safe"""
+    with db_lock:
+        try:
+            return table.get(query)
+        except Exception as e:
+            print(f"[DB] Erro no get: {e}")
+            return None
+
+
+def safe_db_insert(table, data):
+    """Insere dados no banco de forma thread-safe"""
+    with db_lock:
+        try:
+            return table.insert(data)
+        except Exception as e:
+            print(f"[DB] Erro na insercao: {e}")
+            return None
+
+
+def safe_db_update(table, data, query):
+    """Atualiza dados no banco de forma thread-safe"""
+    with db_lock:
+        try:
+            return table.update(data, query)
+        except Exception as e:
+            print(f"[DB] Erro na atualizacao: {e}")
+            return None
 
 
 @app.route('/api/sensor-data', methods=['POST'])
@@ -93,7 +158,7 @@ def receive_sensor_data():
         now = datetime.now().isoformat()
 
         # Insere leitura
-        readings_table.insert({
+        safe_db_insert(readings_table, {
             'gateway_id': gateway_id,
             'node_id': node_id,
             'node_type': node_type,
@@ -106,17 +171,17 @@ def receive_sensor_data():
 
         # Atualiza ou insere dispositivo
         Device = Query()
-        existing = devices_table.get(Device.node_id == node_id)
+        existing = safe_db_get(devices_table, Device.node_id == node_id)
 
         if existing:
-            devices_table.update({
+            safe_db_update(devices_table, {
                 'node_type': node_type,
                 'gateway_id': gateway_id,
                 'last_seen': now,
                 'total_packets': existing.get('total_packets', 0) + 1
             }, Device.node_id == node_id)
         else:
-            devices_table.insert({
+            safe_db_insert(devices_table, {
                 'node_id': node_id,
                 'node_type': node_type,
                 'gateway_id': gateway_id,
@@ -150,7 +215,7 @@ def receive_gateway_status():
         gateway_id = data.get('gateway_id', 'unknown')
         stats = data.get('stats', {})
 
-        gateway_status_table.insert({
+        safe_db_insert(gateway_status_table, {
             'gateway_id': gateway_id,
             'uptime_s': stats.get('uptime_s', 0),
             'packets_rx': stats.get('packets_rx', 0),
@@ -186,7 +251,7 @@ def get_readings():
     limit = request.args.get('limit', 100, type=int)
 
     # Obtem todas as leituras
-    all_readings = readings_table.all()
+    all_readings = safe_db_read(readings_table)
 
     # Filtra
     if node_id:
@@ -216,7 +281,7 @@ def get_readings():
 @app.route('/api/devices', methods=['GET'])
 def get_devices():
     """Retorna lista de dispositivos conhecidos"""
-    all_devices = devices_table.all()
+    all_devices = safe_db_read(devices_table)
 
     # Ordena por ultimo contato
     all_devices.sort(key=lambda x: x.get('last_seen', ''), reverse=True)
@@ -230,8 +295,8 @@ def get_devices():
 @app.route('/api/stats', methods=['GET'])
 def get_stats():
     """Retorna estatisticas gerais do sistema"""
-    all_readings = readings_table.all()
-    all_devices = devices_table.all()
+    all_readings = safe_db_read(readings_table)
+    all_devices = safe_db_read(devices_table)
 
     # Total de leituras
     total_readings = len(all_readings)
@@ -242,14 +307,25 @@ def get_stats():
     # Leituras nas ultimas 24 horas
     now = datetime.now()
     readings_24h = 0
+    total_rssi = 0
+    rssi_count = 0
+
     for r in all_readings:
         try:
             received = datetime.fromisoformat(r.get('received_at', ''))
             diff = (now - received).total_seconds()
             if diff <= 86400:  # 24 horas em segundos
                 readings_24h += 1
+            # Calcula RSSI medio
+            rssi = r.get('rssi', 0)
+            if rssi != 0:
+                total_rssi += rssi
+                rssi_count += 1
         except:
             pass
+
+    # RSSI medio
+    avg_rssi = round(total_rssi / rssi_count) if rssi_count > 0 else 0
 
     # Ultima leitura
     last_reading = None
@@ -265,6 +341,7 @@ def get_stats():
         'total_readings': total_readings,
         'total_devices': total_devices,
         'readings_last_24h': readings_24h,
+        'avg_rssi': avg_rssi,
         'last_reading': last_reading
     })
 
@@ -275,7 +352,7 @@ def get_node_readings(node_id):
     limit = request.args.get('limit', 50, type=int)
 
     Device = Query()
-    all_readings = readings_table.search(Device.node_id == node_id)
+    all_readings = safe_db_search(readings_table, Device.node_id == node_id)
 
     # Ordena por data
     all_readings.sort(key=lambda x: x.get('received_at', ''), reverse=True)

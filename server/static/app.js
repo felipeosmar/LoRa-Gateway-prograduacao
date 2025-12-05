@@ -9,6 +9,7 @@ const UPDATE_INTERVAL = 5000;
 let currentPage = 'dashboard';
 let devices = [];
 let readings = [];
+let machines = {}; // Armazena estado das maquinas por machineId
 
 // Inicializacao
 document.addEventListener('DOMContentLoaded', () => {
@@ -45,6 +46,9 @@ function navigateTo(page) {
         case 'dashboard':
             loadDashboard();
             break;
+        case 'machines':
+            loadMachines();
+            break;
         case 'devices':
             loadDevices();
             break;
@@ -63,6 +67,8 @@ function startAutoRefresh() {
     setInterval(() => {
         if (currentPage === 'dashboard') {
             loadDashboard();
+        } else if (currentPage === 'machines') {
+            loadMachines();
         }
     }, UPDATE_INTERVAL);
 }
@@ -179,6 +185,184 @@ function updateActiveDevices(devices) {
             </div>
         </div>
     `).join('');
+}
+
+// =============================================
+// Machines Page - Monitoramento de Maquinas
+// =============================================
+
+async function loadMachines() {
+    try {
+        // Busca leituras recentes para extrair dados das maquinas
+        const data = await fetchAPI('/api/readings?limit=500');
+        updateConnectionStatus(true);
+
+        console.log('[Machines] Leituras recebidas:', data.readings?.length || 0);
+
+        // Processa leituras para extrair estado mais recente de cada maquina
+        const machineReadings = {};
+
+        (data.readings || []).forEach(reading => {
+            const machineData = reading.data || {};
+
+            // Verifica se e um dado de maquina (tem machineId ou digitalInputs)
+            if (machineData.machineId || machineData.digitalInputs) {
+                const machineId = machineData.machineId || reading.node_id;
+
+                // Guarda apenas a leitura mais recente de cada maquina
+                if (!machineReadings[machineId]) {
+                    machineReadings[machineId] = {
+                        ...machineData,
+                        node_id: reading.node_id,
+                        rssi: reading.rssi,
+                        snr: reading.snr,
+                        received_at: reading.received_at
+                    };
+                    console.log('[Machines] Maquina encontrada:', machineId, machineReadings[machineId]);
+                }
+            }
+        });
+
+        machines = machineReadings;
+        console.log('[Machines] Total de maquinas:', Object.keys(machines).length);
+        renderMachines(machines);
+
+    } catch (error) {
+        console.error('Erro ao carregar maquinas:', error);
+        document.getElementById('machinesGrid').innerHTML = `
+            <div class="empty-state">
+                <p>Erro ao carregar maquinas</p>
+                <p style="font-size: 14px; margin-top: 8px;">${error.message}</p>
+            </div>
+        `;
+    }
+}
+
+function renderMachines(machines) {
+    const container = document.getElementById('machinesGrid');
+
+    const machineList = Object.values(machines);
+
+    if (machineList.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <p>Nenhuma maquina detectada</p>
+                <p style="font-size: 14px; margin-top: 8px;">
+                    Aguardando dados no formato de maquina...
+                </p>
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = machineList.map(machine => {
+        const isOnline = isRecentReading(machine.received_at, 120); // 120 segundos (2 min)
+        const statusClass = isOnline ? 'online' : 'offline';
+        const statusText = isOnline ? 'Online' : 'Offline';
+
+        // Digital Inputs
+        const digitalInputs = machine.digitalInputs || {};
+        const digitalHtml = Object.entries(digitalInputs).map(([key, value]) => `
+            <div class="digital-input">
+                <div class="digital-input-indicator ${value ? 'on' : 'off'}"></div>
+                <span class="digital-input-label">${key.toUpperCase()}</span>
+            </div>
+        `).join('');
+
+        // Analog Inputs
+        const analogInputs = machine.analogInputs || {};
+        const analogHtml = Object.entries(analogInputs).map(([key, value]) => {
+            const percentage = Math.min((value / 4095) * 100, 100); // ADC 12-bit
+            return `
+                <div class="analog-input">
+                    <div class="analog-input-header">
+                        <span class="analog-input-label">${key.toUpperCase()}</span>
+                        <span class="analog-input-value">${value}</span>
+                    </div>
+                    <div class="analog-input-bar">
+                        <div class="analog-input-fill" style="width: ${percentage}%"></div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        // Temperature
+        const temp = machine.temperature;
+        let tempClass = 'normal';
+        if (temp > 50) tempClass = 'hot';
+        else if (temp > 35) tempClass = 'warm';
+
+        const tempHtml = temp !== undefined ? `
+            <div class="io-section">
+                <div class="io-section-title">Temperatura</div>
+                <div class="temperature-display">
+                    <span class="temperature-icon">🌡️</span>
+                    <span class="temperature-value ${tempClass}">
+                        ${temp.toFixed(1)}<span class="temperature-unit">°C</span>
+                    </span>
+                </div>
+            </div>
+        ` : '';
+
+        // Trigger info
+        const trigger = machine.trigger || 'periodic';
+        const triggerClass = trigger === 'event' ? 'event' : 'periodic';
+
+        return `
+            <div class="machine-card ${isOnline ? '' : 'offline'}">
+                <div class="machine-card-header">
+                    <div class="machine-info">
+                        <div class="machine-icon">⚙️</div>
+                        <div>
+                            <div class="machine-title">${escapeHtml(machine.machineId || machine.node_id)}</div>
+                            <div class="machine-mac">${escapeHtml(machine.macAddress || '-')}</div>
+                        </div>
+                    </div>
+                    <div class="machine-status ${statusClass}">
+                        <span class="machine-status-dot"></span>
+                        ${statusText}
+                    </div>
+                </div>
+
+                <div class="machine-card-body">
+                    ${Object.keys(digitalInputs).length > 0 ? `
+                        <div class="io-section">
+                            <div class="io-section-title">Entradas Digitais</div>
+                            <div class="digital-inputs">${digitalHtml}</div>
+                        </div>
+                    ` : ''}
+
+                    ${Object.keys(analogInputs).length > 0 ? `
+                        <div class="io-section">
+                            <div class="io-section-title">Entradas Analogicas</div>
+                            <div class="analog-inputs">${analogHtml}</div>
+                        </div>
+                    ` : ''}
+
+                    ${tempHtml}
+                </div>
+
+                <div class="machine-card-footer">
+                    <span>Atualizado: ${formatTimeAgo(machine.received_at)}</span>
+                    <span class="machine-trigger ${triggerClass}">
+                        ${trigger === 'event' ? '⚡' : '🔄'} ${trigger}
+                    </span>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+function isRecentReading(dateStr, maxSeconds = 120) {
+    if (!dateStr) return false;
+    try {
+        const date = new Date(dateStr);
+        const now = new Date();
+        const diff = (now - date) / 1000;
+        return diff <= maxSeconds;
+    } catch (e) {
+        return false;
+    }
 }
 
 // Devices Page
