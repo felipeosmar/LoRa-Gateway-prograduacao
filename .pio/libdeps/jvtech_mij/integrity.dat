@@ -1,0 +1,4 @@
+esphome/ESPAsyncWebServer-esphome@^3.2.2
+WiFi
+bblanchon/ArduinoJson@^7.0.0
+sandeepmistry/LoRa@^0.8.0

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoRa Network Monitor</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <span class="logo-icon">&#128225;</span>
+                <span class="logo-text">LoRa Monitor</span>
+            </div>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item active" data-page="dashboard">
+                <span class="nav-icon">&#128200;</span>
+                <span>Dashboard</span>
+            </li>
+            <li class="nav-item" data-page="devices">
+                <span class="nav-icon">&#128268;</span>
+                <span>Dispositivos</span>
+            </li>
+            <li class="nav-item" data-page="readings">
+                <span class="nav-icon">&#128202;</span>
+                <span>Leituras</span>
+            </li>
+            <li class="nav-item" data-page="export">
+                <span class="nav-icon">&#128190;</span>
+                <span>Exportar</span>
+            </li>
+        </ul>
+        <div class="sidebar-footer">
+            <div class="connection-status" id="serverStatus">
+                <span class="status-dot"></span>
+                <span>Conectado</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- Dashboard Page -->
+        <section class="page active" id="page-dashboard">
+            <header class="page-header">
+                <h1>Dashboard</h1>
+                <p class="page-subtitle">Visao geral da rede LoRa</p>
+            </header>
+
+            <div class="stats-cards">
+                <div class="stat-card">
+                    <div class="stat-icon blue">&#128268;</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="totalDevices">-</span>
+                        <span class="stat-label">Dispositivos</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green">&#128202;</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="totalReadings">-</span>
+                        <span class="stat-label">Total de Leituras</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange">&#128337;</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="readings24h">-</span>
+                        <span class="stat-label">Leituras (24h)</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon purple">&#128246;</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="avgRssi">-</span>
+                        <span class="stat-label">RSSI Medio</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Atividade Recente</h3>
+                        <span class="badge" id="activityCount">0</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="activity-list" id="recentActivity">
+                            <div class="empty-state">Carregando...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Dispositivos Ativos</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="devices-grid" id="activeDevices">
+                            <div class="empty-state">Carregando...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Devices Page -->
+        <section class="page" id="page-devices">
+            <header class="page-header">
+                <h1>Dispositivos</h1>
+                <p class="page-subtitle">Todos os nodes da rede</p>
+            </header>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>Lista de Dispositivos</h3>
+                    <button class="btn btn-secondary" onclick="refreshDevices()">
+                        <span>&#8635;</span> Atualizar
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Node ID</th>
+                                    <th>Tipo</th>
+                                    <th>Gateway</th>
+                                    <th>Pacotes</th>
+                                    <th>Primeiro Contato</th>
+                                    <th>Ultimo Contato</th>
+                                    <th>Acoes</th>
+                                </tr>
+                            </thead>
+                            <tbody id="devicesTableBody">
+                                <tr>
+                                    <td colspan="7" class="empty-state">Carregando...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Readings Page -->
+        <section class="page" id="page-readings">
+            <header class="page-header">
+                <h1>Leituras</h1>
+                <p class="page-subtitle">Historico de dados recebidos</p>
+            </header>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>Filtros</h3>
+                </div>
+                <div class="card-body">
+                    <div class="filters-row">
+                        <div class="filter-group">
+                            <label>Dispositivo</label>
+                            <select id="filterDevice">
+                                <option value="">Todos</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Quantidade</label>
+                            <select id="filterLimit">
+                                <option value="25">25 registros</option>
+                                <option value="50" selected>50 registros</option>
+                                <option value="100">100 registros</option>
+                                <option value="500">500 registros</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" onclick="applyFilters()">
+                            Aplicar Filtros
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>Leituras</h3>
+                    <span class="badge" id="readingsCount">0</span>
+                </div>
+                <div class="card-body">
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Data/Hora</th>
+                                    <th>Node</th>
+                                    <th>Tipo</th>
+                                    <th>Dados</th>
+                                    <th>RSSI</th>
+                                    <th>SNR</th>
+                                </tr>
+                            </thead>
+                            <tbody id="readingsTableBody">
+                                <tr>
+                                    <td colspan="6" class="empty-state">Carregando...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Export Page -->
+        <section class="page" id="page-export">
+            <header class="page-header">
+                <h1>Exportar Dados</h1>
+                <p class="page-subtitle">Baixe os dados em diferentes formatos</p>
+            </header>
+
+            <div class="export-grid">
+                <div class="card export-card">
+                    <div class="export-icon">&#128196;</div>
+                    <h3>Exportar CSV</h3>
+                    <p>Todas as leituras em formato CSV, compativel com Excel</p>
+                    <div class="filter-group">
+                        <label>Dispositivo (opcional)</label>
+                        <select id="exportDevice">
+                            <option value="">Todos</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" onclick="exportCSV()">
+                        Baixar CSV
+                    </button>
+                </div>
+
+                <div class="card export-card">
+                    <div class="export-icon">&#128203;</div>
+                    <h3>Exportar JSON</h3>
+                    <p>Dados estruturados em formato JSON</p>
+                    <div class="filter-group">
+                        <label>Quantidade</label>
+                        <select id="exportLimit">
+                            <option value="100">100 registros</option>
+                            <option value="500">500 registros</option>
+                            <option value="1000">1000 registros</option>
+                            <option value="0">Todos</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-secondary" onclick="exportJSON()">
+                        Baixar JSON
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Device Detail Modal -->
+        <div class="modal" id="deviceModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modalDeviceTitle">Detalhes do Dispositivo</h2>
+                    <button class="modal-close" onclick="closeModal()">&times;</button>
+                </div>
+                <div class="modal-body" id="modalDeviceBody">
+                    <!-- Conteudo dinamico -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

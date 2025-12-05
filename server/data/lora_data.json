@@ -1,0 +1,1948 @@
+{
+  "sensor_readings": {
+    "1": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1709,
+      "data": {
+        "temp": 23.6,
+        "hum": 49.9,
+        "bat": 3.55
+      },
+      "rssi": -47,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:34:16.648731"
+    },
+    "2": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1713,
+      "data": {
+        "temp": 22.7,
+        "hum": 47.2,
+        "bat": 4.13
+      },
+      "rssi": -46,
+      "snr": 9.75,
+      "received_at": "2025-12-05T14:34:37.384226"
+    },
+    "3": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1714,
+      "data": {
+        "temp": 25.3,
+        "hum": 46.6,
+        "bat": 4.19
+      },
+      "rssi": -46,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:34:42.580240"
+    },
+    "4": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1715,
+      "data": {
+        "temp": 27.4,
+        "hum": 52.6,
+        "bat": 4.07
+      },
+      "rssi": -46,
+      "snr": 10,
+      "received_at": "2025-12-05T14:34:47.760084"
+    },
+    "5": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1725,
+      "data": {
+        "temp": 21.6,
+        "hum": 43.6,
+        "bat": 3.39
+      },
+      "rssi": -46,
+      "snr": 10,
+      "received_at": "2025-12-05T14:35:39.636551"
+    },
+    "6": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1726,
+      "data": {
+        "temp": 21.9,
+        "hum": 56.3,
+        "bat": 3.59
+      },
+      "rssi": -46,
+      "snr": 9.75,
+      "received_at": "2025-12-05T14:35:44.824871"
+    },
+    "7": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1728,
+      "data": {
+        "temp": 22,
+        "hum": 60.1,
+        "bat": 3.86
+      },
+      "rssi": -45,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:35:55.187225"
+    },
+    "8": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1730,
+      "data": {
+        "temp": 22.4,
+        "hum": 44.9,
+        "bat": 4.06
+      },
+      "rssi": -46,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:36:05.558369"
+    },
+    "9": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1732,
+      "data": {
+        "temp": 26.2,
+        "hum": 68.7,
+        "bat": 3.64
+      },
+      "rssi": -46,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:36:15.955018"
+    },
+    "10": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1733,
+      "data": {
+        "temp": 28.3,
+        "hum": 57,
+        "bat": 3.47
+      },
+      "rssi": -46,
+      "snr": 9.75,
+      "received_at": "2025-12-05T14:36:21.121132"
+    },
+    "11": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1735,
+      "data": {
+        "temp": 27.7,
+        "hum": 68.8,
+        "bat": 3.86
+      },
+      "rssi": -46,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:36:31.495331"
+    },
+    "12": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1744,
+      "data": {
+        "temp": 24.8,
+        "hum": 78.1,
+        "bat": 3.66
+      },
+      "rssi": -46,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:37:18.171808"
+    },
+    "13": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1745,
+      "data": {
+        "temp": 25.1,
+        "hum": 45.3,
+        "bat": 4.06
+      },
+      "rssi": -46,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:37:23.353863"
+    },
+    "14": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1751,
+      "data": {
+        "temp": 23.1,
+        "hum": 63.8,
+        "bat": 4.13
+      },
+      "rssi": -46,
+      "snr": 10,
+      "received_at": "2025-12-05T14:37:54.467470"
+    },
+    "15": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1757,
+      "data": {
+        "temp": 22.9,
+        "hum": 65.1,
+        "bat": 4.02
+      },
+      "rssi": -46,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:38:25.588065"
+    },
+    "16": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1760,
+      "data": {
+        "temp": 28.7,
+        "hum": 78.9,
+        "bat": 4.16
+      },
+      "rssi": -47,
+      "snr": 9.25,
+      "received_at": "2025-12-05T14:38:41.153843"
+    },
+    "17": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1765,
+      "data": {
+        "temp": 24.2,
+        "hum": 49.8,
+        "bat": 3.86
+      },
+      "rssi": -46,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:39:07.097842"
+    },
+    "18": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1766,
+      "data": {
+        "temp": 25.5,
+        "hum": 60,
+        "bat": 3.57
+      },
+      "rssi": -45,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:39:12.244062"
+    },
+    "19": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1767,
+      "data": {
+        "temp": 25,
+        "hum": 70.9,
+        "bat": 4.02
+      },
+      "rssi": -46,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:39:17.436390"
+    },
+    "20": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1771,
+      "data": {
+        "temp": 27.1,
+        "hum": 53.7,
+        "bat": 3.65
+      },
+      "rssi": -46,
+      "snr": 9.75,
+      "received_at": "2025-12-05T14:39:38.175461"
+    },
+    "21": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1779,
+      "data": {
+        "temp": 21.6,
+        "hum": 68.7,
+        "bat": 3.96
+      },
+      "rssi": -51,
+      "snr": 9.75,
+      "received_at": "2025-12-05T14:40:19.669745"
+    },
+    "22": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1786,
+      "data": {
+        "temp": 26,
+        "hum": 42.1,
+        "bat": 3.57
+      },
+      "rssi": -48,
+      "snr": 9.25,
+      "received_at": "2025-12-05T14:40:55.953695"
+    },
+    "23": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1790,
+      "data": {
+        "temp": 29.1,
+        "hum": 46.6,
+        "bat": 4.19
+      },
+      "rssi": -48,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:41:16.707921"
+    },
+    "24": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1791,
+      "data": {
+        "temp": 24.5,
+        "hum": 62.5,
+        "bat": 3.32
+      },
+      "rssi": -48,
+      "snr": 9.25,
+      "received_at": "2025-12-05T14:41:21.886890"
+    },
+    "25": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1798,
+      "data": {
+        "temp": 29.6,
+        "hum": 49.5,
+        "bat": 3.39
+      },
+      "rssi": -48,
+      "snr": 9,
+      "received_at": "2025-12-05T14:41:58.209396"
+    },
+    "26": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1806,
+      "data": {
+        "temp": 21.8,
+        "hum": 72.1,
+        "bat": 3.67
+      },
+      "rssi": -48,
+      "snr": 9.25,
+      "received_at": "2025-12-05T14:42:39.671189"
+    },
+    "27": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1809,
+      "data": {
+        "temp": 28.1,
+        "hum": 63.7,
+        "bat": 3.82
+      },
+      "rssi": -48,
+      "snr": 9.75,
+      "received_at": "2025-12-05T14:42:55.250597"
+    },
+    "28": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1810,
+      "data": {
+        "temp": 29.2,
+        "hum": 73.8,
+        "bat": 3.78
+      },
+      "rssi": -48,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:43:00.415177"
+    },
+    "29": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1812,
+      "data": {
+        "temp": 27.1,
+        "hum": 41.6,
+        "bat": 3.32
+      },
+      "rssi": -48,
+      "snr": 9.75,
+      "received_at": "2025-12-05T14:43:10.806765"
+    },
+    "30": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1820,
+      "data": {
+        "temp": 26.2,
+        "hum": 43.6,
+        "bat": 3.61
+      },
+      "rssi": -48,
+      "snr": 9.25,
+      "received_at": "2025-12-05T14:43:52.281738"
+    },
+    "31": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1832,
+      "data": {
+        "temp": 22.7,
+        "hum": 47.4,
+        "bat": 3.92
+      },
+      "rssi": -47,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:44:54.528042"
+    },
+    "32": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1835,
+      "data": {
+        "temp": 28,
+        "hum": 65.7,
+        "bat": 3.52
+      },
+      "rssi": -47,
+      "snr": 9.75,
+      "received_at": "2025-12-05T14:45:10.066785"
+    },
+    "33": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1838,
+      "data": {
+        "temp": 23.3,
+        "hum": 57.5,
+        "bat": 3.41
+      },
+      "rssi": -47,
+      "snr": 9.75,
+      "received_at": "2025-12-05T14:45:25.630116"
+    },
+    "34": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1841,
+      "data": {
+        "temp": 23.3,
+        "hum": 47.3,
+        "bat": 4.01
+      },
+      "rssi": -47,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:45:41.195548"
+    },
+    "35": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1842,
+      "data": {
+        "temp": 27.2,
+        "hum": 47.3,
+        "bat": 4.09
+      },
+      "rssi": -48,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:45:46.372624"
+    },
+    "36": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1844,
+      "data": {
+        "temp": 27.2,
+        "hum": 70.8,
+        "bat": 3.92
+      },
+      "rssi": -47,
+      "snr": 10,
+      "received_at": "2025-12-05T14:45:56.750052"
+    },
+    "37": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1849,
+      "data": {
+        "temp": 22.5,
+        "hum": 79.7,
+        "bat": 3.45
+      },
+      "rssi": -47,
+      "snr": 9.75,
+      "received_at": "2025-12-05T14:46:22.679364"
+    },
+    "38": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1857,
+      "data": {
+        "temp": 21.6,
+        "hum": 51.8,
+        "bat": 3.77
+      },
+      "rssi": -48,
+      "snr": 9.75,
+      "received_at": "2025-12-05T14:47:04.172390"
+    },
+    "39": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1861,
+      "data": {
+        "temp": 27.7,
+        "hum": 52.4,
+        "bat": 3.38
+      },
+      "rssi": -47,
+      "snr": 9.75,
+      "received_at": "2025-12-05T14:47:24.896837"
+    },
+    "40": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1872,
+      "data": {
+        "temp": 20.4,
+        "hum": 51.3,
+        "bat": 3.74
+      },
+      "rssi": -47,
+      "snr": 10,
+      "received_at": "2025-12-05T14:48:21.928719"
+    },
+    "41": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1876,
+      "data": {
+        "temp": 26.7,
+        "hum": 45.8,
+        "bat": 3.86
+      },
+      "rssi": -48,
+      "snr": 10.25,
+      "received_at": "2025-12-05T14:48:42.722508"
+    },
+    "42": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1893,
+      "data": {
+        "temp": 28,
+        "hum": 75.8,
+        "bat": 4.04
+      },
+      "rssi": -47,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:50:10.829287"
+    },
+    "43": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1894,
+      "data": {
+        "temp": 25.7,
+        "hum": 40.7,
+        "bat": 3.83
+      },
+      "rssi": -48,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:50:16.009100"
+    },
+    "44": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1897,
+      "data": {
+        "temp": 24.6,
+        "hum": 78.1,
+        "bat": 3.32
+      },
+      "rssi": -48,
+      "snr": 7.25,
+      "received_at": "2025-12-05T14:50:31.558468"
+    },
+    "45": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1908,
+      "data": {
+        "temp": 22.1,
+        "hum": 64,
+        "bat": 3.64
+      },
+      "rssi": -48,
+      "snr": 9.75,
+      "received_at": "2025-12-05T14:51:28.594847"
+    },
+    "46": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1911,
+      "data": {
+        "temp": 23.2,
+        "hum": 56.2,
+        "bat": 3.53
+      },
+      "rssi": -48,
+      "snr": 9.75,
+      "received_at": "2025-12-05T14:51:44.161191"
+    },
+    "47": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1916,
+      "data": {
+        "temp": 29.8,
+        "hum": 65.8,
+        "bat": 3.3
+      },
+      "rssi": -47,
+      "snr": 9.75,
+      "received_at": "2025-12-05T14:52:10.081128"
+    },
+    "48": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1925,
+      "data": {
+        "temp": 28.6,
+        "hum": 71.2,
+        "bat": 3.33
+      },
+      "rssi": -49,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:52:56.749472"
+    },
+    "49": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1927,
+      "data": {
+        "temp": 21.9,
+        "hum": 43.6,
+        "bat": 3.9
+      },
+      "rssi": -45,
+      "snr": 9.25,
+      "received_at": "2025-12-05T14:53:07.118868"
+    },
+    "50": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1929,
+      "data": {
+        "temp": 27.4,
+        "hum": 59.8,
+        "bat": 3.4
+      },
+      "rssi": -47,
+      "snr": 9.75,
+      "received_at": "2025-12-05T14:53:17.493462"
+    },
+    "51": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1933,
+      "data": {
+        "temp": 23.7,
+        "hum": 58.6,
+        "bat": 3.98
+      },
+      "rssi": -48,
+      "snr": 9.25,
+      "received_at": "2025-12-05T14:53:38.244798"
+    },
+    "52": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1938,
+      "data": {
+        "temp": 21.7,
+        "hum": 43.6,
+        "bat": 3.77
+      },
+      "rssi": -48,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:54:04.149062"
+    },
+    "53": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1944,
+      "data": {
+        "temp": 28.5,
+        "hum": 61.6,
+        "bat": 3.6
+      },
+      "rssi": -47,
+      "snr": 10,
+      "received_at": "2025-12-05T14:54:35.254752"
+    },
+    "54": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1947,
+      "data": {
+        "temp": 25.3,
+        "hum": 78.3,
+        "bat": 3.75
+      },
+      "rssi": -48,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:54:50.831894"
+    },
+    "55": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1949,
+      "data": {
+        "temp": 28.5,
+        "hum": 53.9,
+        "bat": 3.8
+      },
+      "rssi": -47,
+      "snr": 10,
+      "received_at": "2025-12-05T14:55:01.191311"
+    },
+    "56": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1956,
+      "data": {
+        "temp": 24.6,
+        "hum": 74.2,
+        "bat": 4.03
+      },
+      "rssi": -47,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:55:37.505614"
+    },
+    "57": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1963,
+      "data": {
+        "temp": 23.9,
+        "hum": 74.4,
+        "bat": 3.4
+      },
+      "rssi": -47,
+      "snr": 9.75,
+      "received_at": "2025-12-05T14:56:13.784751"
+    },
+    "58": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1968,
+      "data": {
+        "temp": 21.7,
+        "hum": 42.8,
+        "bat": 4.18
+      },
+      "rssi": -48,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:56:39.739735"
+    },
+    "59": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1972,
+      "data": {
+        "temp": 25.3,
+        "hum": 74.5,
+        "bat": 4.19
+      },
+      "rssi": -48,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:57:00.467849"
+    },
+    "60": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1973,
+      "data": {
+        "temp": 29.7,
+        "hum": 76,
+        "bat": 4.16
+      },
+      "rssi": -47,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:57:05.642007"
+    },
+    "61": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1976,
+      "data": {
+        "temp": 22.9,
+        "hum": 45.8,
+        "bat": 4.15
+      },
+      "rssi": -48,
+      "snr": 9.75,
+      "received_at": "2025-12-05T14:57:21.203762"
+    },
+    "62": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1986,
+      "data": {
+        "temp": 24.4,
+        "hum": 41.8,
+        "bat": 3.95
+      },
+      "rssi": -47,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:58:13.076928"
+    },
+    "63": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1991,
+      "data": {
+        "temp": 23.8,
+        "hum": 47.1,
+        "bat": 3.66
+      },
+      "rssi": -48,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:58:39.006503"
+    },
+    "64": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 1999,
+      "data": {
+        "temp": 22.8,
+        "hum": 56.5,
+        "bat": 3.7
+      },
+      "rssi": -45,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:59:20.516569"
+    },
+    "65": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2000,
+      "data": {
+        "temp": 26.4,
+        "hum": 47.6,
+        "bat": 3.63
+      },
+      "rssi": -45,
+      "snr": 9.5,
+      "received_at": "2025-12-05T14:59:25.685464"
+    },
+    "66": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2010,
+      "data": {
+        "temp": 22.6,
+        "hum": 67.5,
+        "bat": 4.11
+      },
+      "rssi": -45,
+      "snr": 9.25,
+      "received_at": "2025-12-05T15:00:17.576749"
+    },
+    "67": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2023,
+      "data": {
+        "temp": 22.2,
+        "hum": 40.8,
+        "bat": 3.63
+      },
+      "rssi": -45,
+      "snr": 9.5,
+      "received_at": "2025-12-05T15:01:24.961792"
+    },
+    "68": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2027,
+      "data": {
+        "temp": 24.6,
+        "hum": 75.7,
+        "bat": 4.16
+      },
+      "rssi": -45,
+      "snr": 9.5,
+      "received_at": "2025-12-05T15:01:45.680300"
+    },
+    "69": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2032,
+      "data": {
+        "temp": 27.1,
+        "hum": 58.7,
+        "bat": 3.94
+      },
+      "rssi": -45,
+      "snr": 9.75,
+      "received_at": "2025-12-05T15:02:11.590103"
+    },
+    "70": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2037,
+      "data": {
+        "temp": 20.3,
+        "hum": 62.7,
+        "bat": 3.38
+      },
+      "rssi": -45,
+      "snr": 9.25,
+      "received_at": "2025-12-05T15:02:37.529952"
+    },
+    "71": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2044,
+      "data": {
+        "temp": 20.9,
+        "hum": 68.8,
+        "bat": 3.83
+      },
+      "rssi": -45,
+      "snr": 9.25,
+      "received_at": "2025-12-05T15:03:13.831512"
+    },
+    "72": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2047,
+      "data": {
+        "temp": 25.1,
+        "hum": 72.6,
+        "bat": 3.37
+      },
+      "rssi": -45,
+      "snr": 9.75,
+      "received_at": "2025-12-05T15:03:29.391325"
+    },
+    "73": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2051,
+      "data": {
+        "temp": 25.5,
+        "hum": 71.2,
+        "bat": 3.74
+      },
+      "rssi": -45,
+      "snr": 9.5,
+      "received_at": "2025-12-05T15:03:50.147776"
+    },
+    "74": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2052,
+      "data": {
+        "temp": 27,
+        "hum": 69.4,
+        "bat": 3.31
+      },
+      "rssi": -45,
+      "snr": 9.25,
+      "received_at": "2025-12-05T15:03:55.325840"
+    },
+    "75": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2056,
+      "data": {
+        "temp": 22.4,
+        "hum": 51.5,
+        "bat": 3.56
+      },
+      "rssi": -46,
+      "snr": 9.5,
+      "received_at": "2025-12-05T15:04:16.069331"
+    },
+    "76": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2064,
+      "data": {
+        "temp": 28,
+        "hum": 62.9,
+        "bat": 3.65
+      },
+      "rssi": -45,
+      "snr": 9.75,
+      "received_at": "2025-12-05T15:04:57.547879"
+    },
+    "77": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2065,
+      "data": {
+        "temp": 20,
+        "hum": 43.7,
+        "bat": 3.31
+      },
+      "rssi": -45,
+      "snr": 9.75,
+      "received_at": "2025-12-05T15:05:02.727457"
+    },
+    "78": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2068,
+      "data": {
+        "temp": 24.7,
+        "hum": 54.6,
+        "bat": 4.19
+      },
+      "rssi": -45,
+      "snr": 9.5,
+      "received_at": "2025-12-05T15:05:18.285417"
+    },
+    "79": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2080,
+      "data": {
+        "temp": 26.8,
+        "hum": 69.1,
+        "bat": 3.52
+      },
+      "rssi": -45,
+      "snr": 9.5,
+      "received_at": "2025-12-05T15:06:20.532018"
+    },
+    "80": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2084,
+      "data": {
+        "temp": 20.6,
+        "hum": 60.2,
+        "bat": 3.96
+      },
+      "rssi": -45,
+      "snr": 9.25,
+      "received_at": "2025-12-05T15:06:41.273858"
+    },
+    "81": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2087,
+      "data": {
+        "temp": 20.8,
+        "hum": 51,
+        "bat": 3.57
+      },
+      "rssi": -45,
+      "snr": 9.25,
+      "received_at": "2025-12-05T15:06:56.830464"
+    },
+    "82": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2088,
+      "data": {
+        "temp": 27.9,
+        "hum": 46.3,
+        "bat": 3.73
+      },
+      "rssi": -46,
+      "snr": 9.25,
+      "received_at": "2025-12-05T15:07:02.001435"
+    },
+    "83": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2094,
+      "data": {
+        "temp": 27.5,
+        "hum": 77.2,
+        "bat": 3.69
+      },
+      "rssi": -46,
+      "snr": 9.5,
+      "received_at": "2025-12-05T15:07:33.118972"
+    },
+    "84": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2106,
+      "data": {
+        "temp": 27,
+        "hum": 65.1,
+        "bat": 3.48
+      },
+      "rssi": -45,
+      "snr": 10.25,
+      "received_at": "2025-12-05T15:08:35.319927"
+    },
+    "85": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2109,
+      "data": {
+        "temp": 20.6,
+        "hum": 60.1,
+        "bat": 3.38
+      },
+      "rssi": -45,
+      "snr": 9.25,
+      "received_at": "2025-12-05T15:08:50.872310"
+    },
+    "86": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2112,
+      "data": {
+        "temp": 29.6,
+        "hum": 72,
+        "bat": 3.92
+      },
+      "rssi": -44,
+      "snr": 10.25,
+      "received_at": "2025-12-05T15:09:06.427836"
+    },
+    "87": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2113,
+      "data": {
+        "temp": 27.7,
+        "hum": 57.4,
+        "bat": 3.73
+      },
+      "rssi": -45,
+      "snr": 9.5,
+      "received_at": "2025-12-05T15:09:11.622353"
+    },
+    "88": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2117,
+      "data": {
+        "temp": 21.2,
+        "hum": 60.4,
+        "bat": 3.94
+      },
+      "rssi": -45,
+      "snr": 9.25,
+      "received_at": "2025-12-05T15:09:32.364509"
+    },
+    "89": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2118,
+      "data": {
+        "temp": 29.1,
+        "hum": 54,
+        "bat": 3.39
+      },
+      "rssi": -44,
+      "snr": 9.75,
+      "received_at": "2025-12-05T15:09:37.568192"
+    },
+    "90": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2119,
+      "data": {
+        "temp": 22.8,
+        "hum": 55.7,
+        "bat": 3.32
+      },
+      "rssi": -46,
+      "snr": 9.75,
+      "received_at": "2025-12-05T15:09:42.743731"
+    },
+    "91": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2120,
+      "data": {
+        "temp": 20,
+        "hum": 50.9,
+        "bat": 3.43
+      },
+      "rssi": -45,
+      "snr": 9.5,
+      "received_at": "2025-12-05T15:09:47.922444"
+    },
+    "92": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2121,
+      "data": {
+        "temp": 23.9,
+        "hum": 46.4,
+        "bat": 3.42
+      },
+      "rssi": -45,
+      "snr": 10,
+      "received_at": "2025-12-05T15:09:53.105118"
+    },
+    "93": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2125,
+      "data": {
+        "temp": 23,
+        "hum": 47.4,
+        "bat": 3.48
+      },
+      "rssi": -44,
+      "snr": 10.25,
+      "received_at": "2025-12-05T15:10:13.854348"
+    },
+    "94": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2126,
+      "data": {
+        "temp": 27.4,
+        "hum": 65.6,
+        "bat": 3.68
+      },
+      "rssi": -45,
+      "snr": 9.5,
+      "received_at": "2025-12-05T15:10:19.050039"
+    },
+    "95": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2129,
+      "data": {
+        "temp": 29,
+        "hum": 46.1,
+        "bat": 3.36
+      },
+      "rssi": -44,
+      "snr": 9.5,
+      "received_at": "2025-12-05T15:10:34.618197"
+    },
+    "96": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2133,
+      "data": {
+        "temp": 29.5,
+        "hum": 72.6,
+        "bat": 3.82
+      },
+      "rssi": -45,
+      "snr": 9.5,
+      "received_at": "2025-12-05T15:10:55.374670"
+    },
+    "97": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2139,
+      "data": {
+        "temp": 21.4,
+        "hum": 46.7,
+        "bat": 4.11
+      },
+      "rssi": -45,
+      "snr": 9.25,
+      "received_at": "2025-12-05T15:11:26.469595"
+    },
+    "98": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2149,
+      "data": {
+        "temp": 27.1,
+        "hum": 53.6,
+        "bat": 3.63
+      },
+      "rssi": -45,
+      "snr": 9.5,
+      "received_at": "2025-12-05T15:12:18.316726"
+    },
+    "99": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2159,
+      "data": {
+        "temp": 25.9,
+        "hum": 44.4,
+        "bat": 3.38
+      },
+      "rssi": -45,
+      "snr": 9.75,
+      "received_at": "2025-12-05T15:13:10.167305"
+    },
+    "100": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2163,
+      "data": {
+        "temp": 20.3,
+        "hum": 78,
+        "bat": 3.63
+      },
+      "rssi": -44,
+      "snr": 9.75,
+      "received_at": "2025-12-05T15:13:30.945393"
+    },
+    "101": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2172,
+      "data": {
+        "temp": 20.1,
+        "hum": 67.3,
+        "bat": 3.84
+      },
+      "rssi": -46,
+      "snr": 9.25,
+      "received_at": "2025-12-05T15:14:18.501544"
+    },
+    "102": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2185,
+      "data": {
+        "temp": 24.5,
+        "hum": 64.7,
+        "bat": 4.06
+      },
+      "rssi": -45,
+      "snr": 9.25,
+      "received_at": "2025-12-05T15:15:24.974769"
+    },
+    "103": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2188,
+      "data": {
+        "temp": 22.8,
+        "hum": 40.3,
+        "bat": 3.37
+      },
+      "rssi": -45,
+      "snr": 9.75,
+      "received_at": "2025-12-05T15:15:40.532312"
+    },
+    "104": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2189,
+      "data": {
+        "temp": 23.3,
+        "hum": 50.2,
+        "bat": 3.48
+      },
+      "rssi": -46,
+      "snr": 9.5,
+      "received_at": "2025-12-05T15:15:45.732694"
+    },
+    "105": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2191,
+      "data": {
+        "temp": 21.5,
+        "hum": 54.1,
+        "bat": 4.13
+      },
+      "rssi": -46,
+      "snr": 9.75,
+      "received_at": "2025-12-05T15:15:56.092015"
+    },
+    "106": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2193,
+      "data": {
+        "temp": 26.2,
+        "hum": 58.2,
+        "bat": 3.95
+      },
+      "rssi": -45,
+      "snr": 9,
+      "received_at": "2025-12-05T15:16:06.472021"
+    },
+    "107": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2194,
+      "data": {
+        "temp": 22.7,
+        "hum": 45.6,
+        "bat": 3.47
+      },
+      "rssi": -45,
+      "snr": 9,
+      "received_at": "2025-12-05T15:16:11.666784"
+    },
+    "108": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2199,
+      "data": {
+        "temp": 20.8,
+        "hum": 55.4,
+        "bat": 3.8
+      },
+      "rssi": -44,
+      "snr": 9.5,
+      "received_at": "2025-12-05T15:16:37.586334"
+    },
+    "109": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2205,
+      "data": {
+        "temp": 29.6,
+        "hum": 74.9,
+        "bat": 3.83
+      },
+      "rssi": -46,
+      "snr": 9,
+      "received_at": "2025-12-05T15:17:08.701932"
+    },
+    "110": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2207,
+      "data": {
+        "temp": 25.5,
+        "hum": 69.7,
+        "bat": 3.99
+      },
+      "rssi": -46,
+      "snr": 9.5,
+      "received_at": "2025-12-05T15:17:19.073291"
+    },
+    "111": {
+      "gateway_id": "GW001",
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "sequence": 2209,
+      "data": {
+        "temp": 23.9,
+        "hum": 40.1,
+        "bat": 3.83
+      },
+      "rssi": -45,
+      "snr": 9.5,
+      "received_at": "2025-12-05T15:17:29.448933"
+    }
+  },
+  "devices": {
+    "1": {
+      "node_id": "NODE001",
+      "node_type": "sensor",
+      "gateway_id": "GW001",
+      "first_seen": "2025-12-05T14:34:16.648731",
+      "last_seen": "2025-12-05T15:17:29.448933",
+      "total_packets": 111
+    }
+  },
+  "gateway_status": {
+    "1": {
+      "gateway_id": "GW001",
+      "uptime_s": 60,
+      "packets_rx": 1,
+      "packets_fwd": 1,
+      "wifi_rssi": -42,
+      "free_heap": 214720,
+      "received_at": "2025-12-05T14:34:30.540136"
+    },
+    "2": {
+      "gateway_id": "GW001",
+      "uptime_s": 120,
+      "packets_rx": 4,
+      "packets_fwd": 4,
+      "wifi_rssi": -40,
+      "free_heap": 211480,
+      "received_at": "2025-12-05T14:35:30.628578"
+    },
+    "3": {
+      "gateway_id": "GW001",
+      "uptime_s": 180,
+      "packets_rx": 10,
+      "packets_fwd": 10,
+      "wifi_rssi": -44,
+      "free_heap": 205060,
+      "received_at": "2025-12-05T14:36:30.731395"
+    },
+    "4": {
+      "gateway_id": "GW001",
+      "uptime_s": 240,
+      "packets_rx": 13,
+      "packets_fwd": 13,
+      "wifi_rssi": -33,
+      "free_heap": 201884,
+      "received_at": "2025-12-05T14:37:30.834306"
+    },
+    "5": {
+      "gateway_id": "GW001",
+      "uptime_s": 300,
+      "packets_rx": 15,
+      "packets_fwd": 15,
+      "wifi_rssi": -34,
+      "free_heap": 199732,
+      "received_at": "2025-12-05T14:38:30.945176"
+    },
+    "6": {
+      "gateway_id": "GW001",
+      "uptime_s": 360,
+      "packets_rx": 19,
+      "packets_fwd": 19,
+      "wifi_rssi": -36,
+      "free_heap": 195452,
+      "received_at": "2025-12-05T14:39:31.044321"
+    },
+    "7": {
+      "gateway_id": "GW001",
+      "uptime_s": 420,
+      "packets_rx": 21,
+      "packets_fwd": 21,
+      "wifi_rssi": -32,
+      "free_heap": 193300,
+      "received_at": "2025-12-05T14:40:31.125601"
+    },
+    "8": {
+      "gateway_id": "GW001",
+      "uptime_s": 480,
+      "packets_rx": 24,
+      "packets_fwd": 24,
+      "wifi_rssi": -30,
+      "free_heap": 190084,
+      "received_at": "2025-12-05T14:41:31.218115"
+    },
+    "9": {
+      "gateway_id": "GW001",
+      "uptime_s": 540,
+      "packets_rx": 25,
+      "packets_fwd": 25,
+      "wifi_rssi": -31,
+      "free_heap": 189008,
+      "received_at": "2025-12-05T14:42:31.301705"
+    },
+    "10": {
+      "gateway_id": "GW001",
+      "uptime_s": 600,
+      "packets_rx": 29,
+      "packets_fwd": 29,
+      "wifi_rssi": -29,
+      "free_heap": 184720,
+      "received_at": "2025-12-05T14:43:31.392769"
+    },
+    "11": {
+      "gateway_id": "GW001",
+      "uptime_s": 660,
+      "packets_rx": 30,
+      "packets_fwd": 30,
+      "wifi_rssi": -28,
+      "free_heap": 183648,
+      "received_at": "2025-12-05T14:44:31.471776"
+    },
+    "12": {
+      "gateway_id": "GW001",
+      "uptime_s": 721,
+      "packets_rx": 33,
+      "packets_fwd": 33,
+      "wifi_rssi": -30,
+      "free_heap": 183648,
+      "received_at": "2025-12-05T14:45:31.554265"
+    },
+    "13": {
+      "gateway_id": "GW001",
+      "uptime_s": 781,
+      "packets_rx": 37,
+      "packets_fwd": 37,
+      "wifi_rssi": -30,
+      "free_heap": 183648,
+      "received_at": "2025-12-05T14:46:31.638107"
+    },
+    "14": {
+      "gateway_id": "GW001",
+      "uptime_s": 841,
+      "packets_rx": 39,
+      "packets_fwd": 39,
+      "wifi_rssi": -32,
+      "free_heap": 183640,
+      "received_at": "2025-12-05T14:47:31.717087"
+    },
+    "15": {
+      "gateway_id": "GW001",
+      "uptime_s": 901,
+      "packets_rx": 40,
+      "packets_fwd": 40,
+      "wifi_rssi": -27,
+      "free_heap": 183648,
+      "received_at": "2025-12-05T14:48:31.829980"
+    },
+    "16": {
+      "gateway_id": "GW001",
+      "uptime_s": 961,
+      "packets_rx": 41,
+      "packets_fwd": 41,
+      "wifi_rssi": -31,
+      "free_heap": 183656,
+      "received_at": "2025-12-05T14:49:31.917443"
+    },
+    "17": {
+      "gateway_id": "GW001",
+      "uptime_s": 1021,
+      "packets_rx": 44,
+      "packets_fwd": 44,
+      "wifi_rssi": -30,
+      "free_heap": 183648,
+      "received_at": "2025-12-05T14:50:32.002264"
+    },
+    "18": {
+      "gateway_id": "GW001",
+      "uptime_s": 1081,
+      "packets_rx": 45,
+      "packets_fwd": 45,
+      "wifi_rssi": -36,
+      "free_heap": 183648,
+      "received_at": "2025-12-05T14:51:32.081902"
+    },
+    "19": {
+      "gateway_id": "GW001",
+      "uptime_s": 1141,
+      "packets_rx": 47,
+      "packets_fwd": 47,
+      "wifi_rssi": -34,
+      "free_heap": 183648,
+      "received_at": "2025-12-05T14:52:32.163484"
+    },
+    "20": {
+      "gateway_id": "GW001",
+      "uptime_s": 1201,
+      "packets_rx": 50,
+      "packets_fwd": 50,
+      "wifi_rssi": -31,
+      "free_heap": 183648,
+      "received_at": "2025-12-05T14:53:32.246469"
+    },
+    "21": {
+      "gateway_id": "GW001",
+      "uptime_s": 1261,
+      "packets_rx": 52,
+      "packets_fwd": 52,
+      "wifi_rssi": -34,
+      "free_heap": 181252,
+      "received_at": "2025-12-05T14:54:32.331214"
+    },
+    "22": {
+      "gateway_id": "GW001",
+      "uptime_s": 1321,
+      "packets_rx": 55,
+      "packets_fwd": 55,
+      "wifi_rssi": -33,
+      "free_heap": 183644,
+      "received_at": "2025-12-05T14:55:32.413166"
+    },
+    "23": {
+      "gateway_id": "GW001",
+      "uptime_s": 1381,
+      "packets_rx": 57,
+      "packets_fwd": 57,
+      "wifi_rssi": -31,
+      "free_heap": 183644,
+      "received_at": "2025-12-05T14:56:32.498178"
+    },
+    "24": {
+      "gateway_id": "GW001",
+      "uptime_s": 1442,
+      "packets_rx": 61,
+      "packets_fwd": 61,
+      "wifi_rssi": -31,
+      "free_heap": 183644,
+      "received_at": "2025-12-05T14:57:32.611549"
+    },
+    "25": {
+      "gateway_id": "GW001",
+      "uptime_s": 1502,
+      "packets_rx": 62,
+      "packets_fwd": 62,
+      "wifi_rssi": -30,
+      "free_heap": 183644,
+      "received_at": "2025-12-05T14:58:32.688326"
+    },
+    "26": {
+      "gateway_id": "GW001",
+      "uptime_s": 60,
+      "packets_rx": 1,
+      "packets_fwd": 1,
+      "wifi_rssi": -32,
+      "free_heap": 214736,
+      "received_at": "2025-12-05T15:00:48.120709"
+    },
+    "27": {
+      "gateway_id": "GW001",
+      "uptime_s": 120,
+      "packets_rx": 3,
+      "packets_fwd": 3,
+      "wifi_rssi": -32,
+      "free_heap": 212592,
+      "received_at": "2025-12-05T15:01:48.230359"
+    },
+    "28": {
+      "gateway_id": "GW001",
+      "uptime_s": 180,
+      "packets_rx": 5,
+      "packets_fwd": 5,
+      "wifi_rssi": -30,
+      "free_heap": 210444,
+      "received_at": "2025-12-05T15:02:48.331042"
+    },
+    "29": {
+      "gateway_id": "GW001",
+      "uptime_s": 240,
+      "packets_rx": 7,
+      "packets_fwd": 7,
+      "wifi_rssi": -34,
+      "free_heap": 208292,
+      "received_at": "2025-12-05T15:03:48.425339"
+    },
+    "30": {
+      "gateway_id": "GW001",
+      "uptime_s": 300,
+      "packets_rx": 10,
+      "packets_fwd": 10,
+      "wifi_rssi": -37,
+      "free_heap": 205076,
+      "received_at": "2025-12-05T15:04:48.522380"
+    },
+    "31": {
+      "gateway_id": "GW001",
+      "uptime_s": 360,
+      "packets_rx": 13,
+      "packets_fwd": 13,
+      "wifi_rssi": -32,
+      "free_heap": 201860,
+      "received_at": "2025-12-05T15:05:48.615727"
+    },
+    "32": {
+      "gateway_id": "GW001",
+      "uptime_s": 420,
+      "packets_rx": 15,
+      "packets_fwd": 15,
+      "wifi_rssi": -30,
+      "free_heap": 199716,
+      "received_at": "2025-12-05T15:06:48.694634"
+    },
+    "33": {
+      "gateway_id": "GW001",
+      "uptime_s": 480,
+      "packets_rx": 18,
+      "packets_fwd": 18,
+      "wifi_rssi": -31,
+      "free_heap": 196500,
+      "received_at": "2025-12-05T15:07:48.771257"
+    },
+    "34": {
+      "gateway_id": "GW001",
+      "uptime_s": 540,
+      "packets_rx": 19,
+      "packets_fwd": 19,
+      "wifi_rssi": -30,
+      "free_heap": 195428,
+      "received_at": "2025-12-05T15:08:48.893637"
+    },
+    "35": {
+      "gateway_id": "GW001",
+      "uptime_s": 600,
+      "packets_rx": 26,
+      "packets_fwd": 26,
+      "wifi_rssi": -32,
+      "free_heap": 187924,
+      "received_at": "2025-12-05T15:09:49.007592"
+    },
+    "36": {
+      "gateway_id": "GW001",
+      "uptime_s": 660,
+      "packets_rx": 30,
+      "packets_fwd": 30,
+      "wifi_rssi": -39,
+      "free_heap": 183636,
+      "received_at": "2025-12-05T15:10:49.083058"
+    },
+    "37": {
+      "gateway_id": "GW001",
+      "uptime_s": 721,
+      "packets_rx": 32,
+      "packets_fwd": 32,
+      "wifi_rssi": -30,
+      "free_heap": 183644,
+      "received_at": "2025-12-05T15:11:49.167034"
+    },
+    "38": {
+      "gateway_id": "GW001",
+      "uptime_s": 781,
+      "packets_rx": 33,
+      "packets_fwd": 33,
+      "wifi_rssi": -31,
+      "free_heap": 183644,
+      "received_at": "2025-12-05T15:12:49.256354"
+    },
+    "39": {
+      "gateway_id": "GW001",
+      "uptime_s": 841,
+      "packets_rx": 35,
+      "packets_fwd": 35,
+      "wifi_rssi": -30,
+      "free_heap": 183644,
+      "received_at": "2025-12-05T15:13:49.471584"
+    },
+    "40": {
+      "gateway_id": "GW001",
+      "uptime_s": 901,
+      "packets_rx": 36,
+      "packets_fwd": 36,
+      "wifi_rssi": -30,
+      "free_heap": 183612,
+      "received_at": "2025-12-05T15:14:49.570999"
+    },
+    "41": {
+      "gateway_id": "GW001",
+      "uptime_s": 961,
+      "packets_rx": 39,
+      "packets_fwd": 39,
+      "wifi_rssi": -30,
+      "free_heap": 183612,
+      "received_at": "2025-12-05T15:15:49.647934"
+    },
+    "42": {
+      "gateway_id": "GW001",
+      "uptime_s": 1021,
+      "packets_rx": 43,
+      "packets_fwd": 43,
+      "wifi_rssi": -35,
+      "free_heap": 183644,
+      "received_at": "2025-12-05T15:16:49.737115"
+    }
+  }
+}

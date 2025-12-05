@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gateway LoRa - Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Gateway LoRa Dashboard</h1>
+        <div class="status-indicator" id="connectionStatus">
+            <span class="status-dot"></span>
+            <span id="statusText">Conectando...</span>
+        </div>
+    </header>
+
+    <main>
+        <!-- Cards de Status do Gateway -->
+        <section class="stats-grid">
+            <div class="card">
+                <div class="card-icon">&#128225;</div>
+                <div class="card-content">
+                    <h3>Gateway ID</h3>
+                    <p id="gatewayId">--</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-icon">&#9201;</div>
+                <div class="card-content">
+                    <h3>Uptime</h3>
+                    <p id="uptime">--</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-icon">&#128339;</div>
+                <div class="card-content">
+                    <h3>Hora do Gateway</h3>
+                    <p id="gatewayTime">--:--:--</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-icon">&#128246;</div>
+                <div class="card-content">
+                    <h3>WiFi RSSI</h3>
+                    <p id="wifiRssi">-- dBm</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-icon">&#128190;</div>
+                <div class="card-content">
+                    <h3>Memoria Livre</h3>
+                    <p id="freeHeap">-- KB</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Estatisticas de Pacotes -->
+        <section class="packets-section">
+            <h2>Estatisticas de Pacotes</h2>
+            <div class="stats-grid">
+                <div class="card card-success">
+                    <div class="card-content">
+                        <h3>Recebidos</h3>
+                        <p class="big-number" id="packetsReceived">0</p>
+                    </div>
+                </div>
+                <div class="card card-info">
+                    <div class="card-content">
+                        <h3>Encaminhados</h3>
+                        <p class="big-number" id="packetsForwarded">0</p>
+                    </div>
+                </div>
+                <div class="card card-error">
+                    <div class="card-content">
+                        <h3>Erros</h3>
+                        <p class="big-number" id="packetsError">0</p>
+                    </div>
+                </div>
+                <div class="card card-warning">
+                    <div class="card-content">
+                        <h3>Taxa de Sucesso</h3>
+                        <p class="big-number" id="successRate">--%</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Configuracao LoRa -->
+        <section class="lora-config">
+            <h2>Configuracao LoRa</h2>
+            <div class="config-grid">
+                <div class="config-item">
+                    <span class="config-label">Frequencia:</span>
+                    <span class="config-value" id="loraFreq">-- MHz</span>
+                </div>
+                <div class="config-item">
+                    <span class="config-label">Spreading Factor:</span>
+                    <span class="config-value" id="loraSF">--</span>
+                </div>
+                <div class="config-item">
+                    <span class="config-label">Bandwidth:</span>
+                    <span class="config-value" id="loraBW">-- kHz</span>
+                </div>
+                <div class="config-item">
+                    <span class="config-label">Coding Rate:</span>
+                    <span class="config-value" id="loraCR">4/--</span>
+                </div>
+                <div class="config-item">
+                    <span class="config-label">TX Power:</span>
+                    <span class="config-value" id="loraTXPower">-- dBm</span>
+                </div>
+                <div class="config-item">
+                    <span class="config-label">Sync Word:</span>
+                    <span class="config-value" id="loraSyncWord">--</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dispositivos Conectados -->
+        <section class="devices-section">
+            <h2>Dispositivos LoRa</h2>
+            <div class="devices-table-container">
+                <table class="devices-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tipo</th>
+                            <th>RSSI</th>
+                            <th>SNR</th>
+                            <th>Pacotes</th>
+                            <th>Ultimo Contato</th>
+                        </tr>
+                    </thead>
+                    <tbody id="devicesTableBody">
+                        <tr>
+                            <td colspan="6" class="no-data">Nenhum dispositivo detectado</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Ultimos Pacotes -->
+        <section class="packets-log">
+            <h2>Ultimos Pacotes Recebidos</h2>
+            <div class="log-container" id="packetsLog">
+                <div class="log-empty">Aguardando pacotes...</div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Gateway LoRa - JVtech MIJ | Atualizado: <span id="lastUpdate">--</span></p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
