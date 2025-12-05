@@ -1,2 +1,7 @@
 server/data/lora_data.json
 .pio/build/*
+.pio/build/jvtech_mij/.sconsign312.dblite
+.pio/build/jvtech_mij/firmware.bin
+.pio/build/jvtech_mij/firmware.elf
+.pio/build/jvtech_mij/firmware.map
+.pio/build/jvtech_mij/src/wifi_handler.cpp.o
